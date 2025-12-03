@@ -1,16 +1,70 @@
-# React + Vite
+# Web Raffle App (Web抽選アプリ)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+プロジェクター投影に最適化された、シンプルで高機能なWebベースの抽選アプリケーションです。
+1920x1080の解像度に合わせてデザインされており、イベントやパーティーでの使用に最適です。
 
-Currently, two official plugins are available:
+## 🔗 デモ (GitHub Pages)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+以下のURLから実際にアプリを使用できます（ブラウザで動作します）：
 
-## React Compiler
+**[https://azrakuc.github.io/web-raffle/](https://azrakuc.github.io/web-raffle/)**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ 特徴
 
-## Expanding the ESLint configuration
+*   **プロジェクター最適化**: 暗い背景に高コントラストの配色、巨大なフォントサイズで遠くからでも視認性抜群。
+*   **3カラムレイアウト**:
+    *   **左**: バナーエリア (300px) - イベントロゴなどを配置可能（現在はプレースホルダー）。
+    *   **中央**: メイン抽選エリア - 巨大な数字表示とアニメーション。
+    *   **右**: 当選履歴 (300px) - 過去の当選番号を縦並びで大きく表示。
+*   **自動抽選**: DRAWボタンを押すとルーレットが回り、3秒後に自動的にストップして当選番号を決定します。
+*   **重複なし**: 一度出た番号は二度と出ません。
+*   **設定可能**: 開始番号と終了番号を自由に設定できます。
+*   **完全ローカル動作**: サーバー通信を行わないため、インターネット環境が不安定な場所でも安心して使用できます。
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 使い方
+
+1.  **設定画面**:
+    *   アプリを開くと最初に設定画面が表示されます。
+    *   **START NUMBER**: 抽選の開始番号を入力します（例: 1）。
+    *   **END NUMBER**: 抽選の終了番号を入力します（例: 100）。
+    *   **START RAFFLE** ボタンを押して抽選画面へ移動します。
+
+2.  **抽選画面**:
+    *   **DRAW** ボタン（またはスペースキー）を押すと抽選が始まります。
+    *   数字が回転し、3秒後に当選番号が表示されます。
+    *   当選番号は右側の履歴エリアに追加されます。
+    *   すべての番号が出尽くすと "ALL NUMBERS DRAWN" と表示されます。
+
+3.  **リセット**:
+    *   右上のリセットボタン（回転矢印アイコン）を押すと、設定画面に戻り、履歴がクリアされます。
+
+## 🛠️ 技術スタック
+
+*   React
+*   Vite
+*   Tailwind CSS
+*   Framer Motion (アニメーション)
+*   Canvas Confetti (紙吹雪エフェクト)
+*   Lucide React (アイコン)
+
+## 📦 開発者向け情報
+
+### インストール
+
+```bash
+npm install
+```
+
+### 開発サーバー起動
+
+```bash
+npm run dev
+```
+
+### ビルド
+
+GitHub Pages用に `docs` フォルダに出力されます。
+
+```bash
+npm run build
+```
