@@ -40,6 +40,11 @@ export const RaffleScreen = ({
         setIsRolling(false);
         setShowWinner(true);
 
+        // Play fanfare
+        const audio = new Audio('./fanfare.mp3');
+        audio.volume = 0.5;
+        audio.play().catch(e => console.log('Audio play failed:', e));
+
         // Confetti effect
         const duration = 3000;
         const end = Date.now() + duration;
@@ -84,12 +89,95 @@ export const RaffleScreen = ({
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [isRolling, isFinished, availableNumbers]);
 
+    // Banner animation loop
+    const [bannerVisible, setBannerVisible] = useState(true);
+    const [currentTextIndex, setCurrentTextIndex] = useState(0);
+    const bannerTexts = [
+        { text: "アイアンドディー", color: "text-neutral-600" },
+        { text: "忘年会ビンゴ", color: "text-yellow-500" }
+    ];
+
+    useEffect(() => {
+        let isMounted = true;
+        const cycleAnimation = async () => {
+            if (!isMounted) return;
+
+            // Show
+            setBannerVisible(true);
+            // Wait for display + reading time
+            await new Promise(resolve => setTimeout(resolve, 5000));
+
+            if (!isMounted) return;
+
+            // Hide
+            setBannerVisible(false);
+            // Wait for exit animation
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            if (!isMounted) return;
+
+            // Switch text and loop
+            setCurrentTextIndex(prev => (prev + 1) % bannerTexts.length);
+            cycleAnimation();
+        };
+        cycleAnimation();
+
+        return () => { isMounted = false; };
+    }, []);
+
+    const bannerContainerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+                delayChildren: 0.2
+            }
+        }
+    };
+
+    const bannerChildVariants = {
+        hidden: { opacity: 0, scale: 0.5, filter: "blur(10px)" },
+        visible: {
+            opacity: 1,
+            scale: 1,
+            filter: "blur(0px)",
+            transition: {
+                type: "spring",
+                damping: 12,
+                stiffness: 100
+            }
+        }
+    };
+
     return (
         <div className="flex flex-col landscape:flex-row h-screen bg-black text-white overflow-hidden">
             {/* Left Banner Area (Hidden on Portrait, Visible on Landscape) */}
-            <div className="hidden landscape:flex w-[150px] lg:w-[300px] bg-neutral-900 border-r border-neutral-800 flex-col items-center justify-center p-4 flex-shrink-0 transition-all duration-300">
-                <div className="w-full h-full border-2 border-dashed border-neutral-700 rounded-xl flex items-center justify-center text-neutral-500">
-                    <span className="text-center text-sm lg:text-base">BANNER<br />AREA</span>
+            <div className="hidden landscape:flex w-[150px] lg:w-[300px] bg-neutral-900 border-r border-neutral-800 items-center justify-center overflow-hidden relative transition-all duration-300">
+                <div className="flex h-full items-center justify-center select-none" style={{ writingMode: 'vertical-rl', textOrientation: 'upright' }}>
+
+                    <motion.div
+                        key={currentTextIndex} // Re-mount on text change to ensure clean animation
+                        className="flex items-center justify-center"
+                        variants={bannerContainerVariants}
+                        initial="hidden"
+                        animate={bannerVisible ? "visible" : "hidden"}
+                    >
+                        {bannerTexts[currentTextIndex].text.split('').map((char, index) => (
+                            <motion.span
+                                key={index}
+                                variants={bannerChildVariants}
+                                className={`font-black leading-none py-2 lg:py-4 ${bannerTexts[currentTextIndex].color}`}
+                                style={{
+                                    fontSize: 'min(11vh, 11vw)',
+                                    textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+                                    fontWeight: 900
+                                }}
+                            >
+                                {char}
+                            </motion.span>
+                        ))}
+                    </motion.div>
                 </div>
             </div>
 

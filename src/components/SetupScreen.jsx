@@ -19,14 +19,18 @@ export const SetupScreen = ({ onStart }) => {
                 <h1 className="text-3xl font-bold text-center mb-8 tracking-wider">RAFFLE SETUP</h1>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-2 gap-6">
+                    <div className="grid grid-cols-2 gap-3">
                         <div className="space-y-2">
                             <label className="block text-sm font-medium text-neutral-400">START NUMBER</label>
                             <input
                                 type="number"
                                 value={start}
                                 onChange={(e) => setStart(e.target.value)}
-                                className="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-4 py-3 text-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all"
+                                className="w-full bg-neutral-900 border border-neutral-700 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all text-center font-bold"
+                                style={{
+                                    fontSize: 'clamp(1.5rem, 4vw, 3rem)',
+                                    padding: 'clamp(0.5rem, 2vw, 1.5rem)'
+                                }}
                                 min="1"
                             />
                         </div>
@@ -36,7 +40,11 @@ export const SetupScreen = ({ onStart }) => {
                                 type="number"
                                 value={end}
                                 onChange={(e) => setEnd(e.target.value)}
-                                className="w-full bg-neutral-900 border border-neutral-700 rounded-lg px-4 py-3 text-xl focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all"
+                                className="w-full bg-neutral-900 border border-neutral-700 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent outline-none transition-all text-center font-bold"
+                                style={{
+                                    fontSize: 'clamp(1.5rem, 4vw, 3rem)',
+                                    padding: 'clamp(0.5rem, 2vw, 1.5rem)'
+                                }}
                                 min={start}
                             />
                         </div>
@@ -45,7 +53,8 @@ export const SetupScreen = ({ onStart }) => {
                     <div className="pt-4">
                         <button
                             type="submit"
-                            className="w-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 hover:to-amber-500 text-black font-bold py-4 rounded-xl text-xl shadow-lg transform transition-all hover:scale-[1.02] active:scale-[0.98]"
+                            className="w-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 hover:to-amber-500 text-black font-bold rounded-xl shadow-lg transform transition-all hover:scale-[1.02] active:scale-[0.98]"
+                            style={{ fontSize: '2.5rem', padding: '1.5rem' }}
                         >
                             START RAFFLE
                         </button>
