@@ -41,9 +41,11 @@ export const RaffleScreen = ({
         setShowWinner(true);
 
         // Play fanfare
-        const audio = new Audio('./fanfare.mp3');
+        // Use BASE_URL to ensure correct path in production (GitHub Pages)
+        const audioPath = `${import.meta.env.BASE_URL}fanfare.mp3`;
+        const audio = new Audio(audioPath);
         audio.volume = 0.5;
-        audio.play().catch(e => console.log('Audio play failed:', e));
+        audio.play().catch(e => console.error('Audio play failed:', e));
 
         // Confetti effect
         const duration = 3000;
