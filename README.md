@@ -7,7 +7,7 @@
 
 以下のURLから実際にアプリを使用できます（ブラウザで動作します）：
 
-**[https://azrakuc.github.io/web-raffle/](https://azrakuc.github.io/web-raffle/)**
+**[https://iad-shinoda.github.io/web-raffle/](https://iad-shinoda.github.io/web-raffle/)**
 
 ## ✨ 特徴
 
